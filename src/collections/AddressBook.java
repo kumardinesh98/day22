@@ -99,7 +99,7 @@ public class AddressBook {
 		String firstName = scanner.nextLine();
 		editContact.setFirstName(validateName(firstName, scanner));
 
-		System.out.println("Enter First Name: ");
+		System.out.println("Enter second Name: ");
 		String secondName = scanner.nextLine();
 		editContact.setSecondName(validateName(secondName, scanner));
 
@@ -113,7 +113,7 @@ public class AddressBook {
 		
 		System.out.println("Enter city: ");
 		String city = scanner.nextLine();
-		editContact.setState(city);
+		editContact.setCity(city);
 
 		System.out.println("Enter state: ");
 		String state = scanner.nextLine();
@@ -121,7 +121,7 @@ public class AddressBook {
 		
 		System.out.println("Enter zip code: ");
 		String zip = scanner.nextLine();
-		editContact.setState(zip);
+		editContact.setZip(zip);
 
 		System.out.println("Contact has been edited.");
 	}
@@ -137,39 +137,53 @@ public class AddressBook {
 	}
 
 	private static void addContact(Scanner scanner) {
+		
+		boolean exist = false;
 		Contact contact = new Contact();
 
 		System.out.println("Enter First Name: ");
 		String firstName = scanner.nextLine();
 		contact.setFirstName(validateName(firstName, scanner));
 		
-
-		System.out.println("Enter second Name: ");
-		String secondName = scanner.nextLine();
-		contact.setSecondName(validateName(secondName, scanner));
-
-		System.out.println("Enter Your Email: ");
-		String email = scanner.nextLine();
-		contact.setEmail(validateEmail(email, scanner));
-
-		System.out.println("Enter Phone Number: ");
-		String phoneNumber = scanner.nextLine();
-		contact.setPhoneNumber(validatePhone(phoneNumber, scanner));
+		for (int i = 0; i < addressBook.size(); i++) {
+			if (firstName.equals(addressBook.get(i).getFirstName())) {
+				exist = true;
+			}
+		}
 		
-		System.out.println("Enter city: ");
-		String city = scanner.nextLine();
-		contact.setState(city);
+		if (!exist) {
+			System.out.println("Enter second Name: ");
+			String secondName = scanner.nextLine();
+			contact.setSecondName(validateName(secondName, scanner));
 
-		System.out.println("Enter state: ");
-		String state = scanner.nextLine();
-		contact.setState(state);
+			System.out.println("Enter Your Email: ");
+			String email = scanner.nextLine();
+			contact.setEmail(validateEmail(email, scanner));
+
+			System.out.println("Enter Phone Number: ");
+			String phoneNumber = scanner.nextLine();
+			contact.setPhoneNumber(validatePhone(phoneNumber, scanner));
+			
+			System.out.println("Enter city: ");
+			String city = scanner.nextLine();
+			contact.setState(city);
+
+			System.out.println("Enter state: ");
+			String state = scanner.nextLine();
+			contact.setState(state);
+			
+			System.out.println("Enter zip code: ");
+			String zip = scanner.nextLine();
+			contact.setState(zip);
+
+			addressBook.add(contact);
+			System.out.println("Contact has been saved.");
+		}
+		else {
+			System.out.println("contact name alredy exist please try with another name");
+		}
+
 		
-		System.out.println("Enter zip code: ");
-		String zip = scanner.nextLine();
-		contact.setState(zip);
-
-		addressBook.add(contact);
-		System.out.println("Contact has been saved.");
 	}
 
 	public static String validateName(String firstName, Scanner scanner) {
@@ -179,7 +193,7 @@ public class AddressBook {
 
 		while (!inputMatcher.matches()) {
 			System.out.println("Error: Invalid first name, please try again");
-			System.out.println("length must not exceeds 10 (Exa: Darpan)");
+			System.out.println("length must not exceeds 10 (Exa: Dinesh)");
 			firstName = scanner.nextLine();
 			inputMatcher = regex.matcher(firstName);
 		}

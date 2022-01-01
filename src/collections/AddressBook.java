@@ -53,6 +53,9 @@ public class AddressBook {
 			case "6":
 				displayByState();
 				break;
+			case "7":
+				isExit = true;
+				break;
 
 			default:
 				System.out.println("Invalid option choosed.");

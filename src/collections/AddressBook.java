@@ -68,6 +68,7 @@ public class AddressBook {
 		int count = 0;
 		for (int i = 0; i < addressBook.size(); i++) {
 			if (addressBook.get(i).getCity() .equals(findCity)) {
+				System.out.println(addressBook.get(i));
 				count++;
 			}
 			else {
@@ -84,6 +85,7 @@ public class AddressBook {
 		int count = 0;
 		for (int i = 0; i < addressBook.size(); i++) {
 			if (addressBook.get(i).getState() .equals(findState)) {
+				System.out.println(addressBook.get(i));
 				count ++;
 			}
 			else {

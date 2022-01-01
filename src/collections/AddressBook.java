@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AddressBook {
-
+	
+	static Scanner scanner = new Scanner(System.in);
 	Contact contact = new Contact();
 	static List<Contact> addressBook;
 
@@ -17,14 +18,14 @@ public class AddressBook {
 		boolean isExit = false;
 
 		System.out.println("Welcome to the Address book, Manage your contacts " + "with the Address book");
-		Scanner scanner = new Scanner(System.in);
 		while (!isExit) {
 			System.out.println("Select the option from below");
 			if (addressBook.isEmpty()) {
 				System.out.println("1. Add Contact" + "\n5. Exit");
 			} else {
 				System.out.println(
-						"1. Add Contact" + "\n2. Display Contact\n3. Edit Contact" + "\n4. Delete Contact\n5. Exit");
+						"1. Add Contact" + "\n2. Display Contact\n3. Edit Contact" + "\n4. Delete Contact"
+								+ "\n5 seach by city name \n6. search by state name \n7. exit" );
 			}
 			String option = scanner.nextLine();
 
@@ -46,8 +47,11 @@ public class AddressBook {
 				break;
 
 			case "5":
-				isExit = true;
-				showContacts();
+				displayByCity();
+				break;
+				
+			case "6":
+				displayByState();
 				break;
 
 			default:
@@ -56,6 +60,37 @@ public class AddressBook {
 			}
 		}
 		scanner.close();
+	}
+
+	private static void displayByCity() {
+		System.out.println("enter city name to find");
+		String findCity = scanner.nextLine();
+		int count = 0;
+		for (int i = 0; i < addressBook.size(); i++) {
+			if (addressBook.get(i).getCity() .equals(findCity)) {
+				count++;
+			}
+			else {
+				System.out.println("no contacts found");
+			}
+		}	
+		System.out.println("total number of persons in " + findCity + " is " + count );
+
+	}
+
+	private static void displayByState() {
+		System.out.println("enter state name to find");
+		String findState = scanner.nextLine();
+		int count = 0;
+		for (int i = 0; i < addressBook.size(); i++) {
+			if (addressBook.get(i).getState() .equals(findState)) {
+				count ++;
+			}
+			else {
+				System.out.println("no contacts found");
+			}
+		}	
+		System.out.println("total number of persons in " + findState + " is " + count );
 	}
 
 	private static void deleteContact(Scanner scanner) {
@@ -166,7 +201,7 @@ public class AddressBook {
 			
 			System.out.println("Enter city: ");
 			String city = scanner.nextLine();
-			contact.setState(city);
+			contact.setCity(city);
 
 			System.out.println("Enter state: ");
 			String state = scanner.nextLine();
@@ -174,7 +209,7 @@ public class AddressBook {
 			
 			System.out.println("Enter zip code: ");
 			String zip = scanner.nextLine();
-			contact.setState(zip);
+			contact.setZip(zip);
 
 			addressBook.add(contact);
 			System.out.println("Contact has been saved.");
